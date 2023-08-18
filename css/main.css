@@ -1,0 +1,106 @@
+body {
+  background-color: rgb(228 221 250);
+  margin: 0;
+  padding: 0;
+}
+h1,
+h3 {
+  font-family: "board";
+  color: rgb(177, 155, 248);
+}
+
+#board_area {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.greeting {
+  color: rgb(177, 155, 248);
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.list-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.list-table thead th {
+  background-color: rgb(177, 155, 248);
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+}
+
+.list-table tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#write_btn button {
+  background-color: rgb(177, 155, 248);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#write_btn button:hover {
+  background-color: rgb(177, 155, 248);
+}
+
+#logout-btn,
+#mypage-btn {
+  padding: 10px 20px;
+  background-color: rgb(177, 155, 248);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#logout-btn:hover {
+  background-color: rgb(177, 155, 248);
+}
+
+.logout-container {
+  text-align: center;
+  margin-top: 20px;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: #000;
+  padding: 5px 10px;
+  border: 1px solid rgb(177, 155, 248);
+  border-radius: 5px;
+}
+
+.pagination a.active {
+  background-color: rgb(177, 155, 248);
+}

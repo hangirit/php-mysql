@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <meta charset="UTF-8" content="text/html" />
+    <link href="./css/join.css" type="text/css" rel="stylesheet" />
+    <title>회원가입 페이지</title>
+  </head>
+  <body>
+    <div id="main">
+      <h1>JOIN</h1>
+      <form action="join_action.php" method="POST" accept-charset="UTF-8">
+        <input class="type" type="text" name="id" placeholder="아이디 입력" />
+        <input
+          class="id-check"
+          type="submit"
+          formaction="check_id.php"
+          formmethod="POST"
+          value="중복 확인"
+        />
+        <br />
+        <br />
+        <input
+          class="type"
+          type="password"
+          name="password1"
+          placeholder="비밀번호 입력"
+        />
+        <input
+          class="type"
+          type="password"
+          name="password2"
+          placeholder="비밀번호 확인"
+        />
+        <br />
+        <input class="type" type="text" name="name" placeholder="이름" />
+        <input
+          class="type"
+          type="text"
+          name="address"
+          placeholder="주소 (예시: seoul 검색)"
+        />
+        <input
+          class="id-check"
+          type="submit"
+          value="주소 검색"
+          formaction="juso_action.php"
+          formmethod="POST"
+          accept-charset="UTF-8"
+        />
+        <br />
+        <br />
+        <input class="type2" type="submit" value="만들기" />
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+body {
+  background-color: rgb(228, 221, 250);
+}
+#board_read {
+  width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#board_read h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#user_info {
+  font-size: 14px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+#bo_line {
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  margin: 10px 0;
+}
+
+#bo_content {
+  font-size: 16px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+#bo_ser {
+  font-size: 14px;
+  color: black;
+}
+
+#bo_ser ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+#bo_ser ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+#bo_ser ul li a {
+  color: black;
+  text-decoration: none;
+}
+
+#bo_ser ul li a:hover {
+  color: rgb(177, 155, 248);
+}
