@@ -15,14 +15,15 @@ if ($num > 0) {
     $row = mysqli_fetch_assoc($result);
 
     if (isset($_POST["action"])) {
-        $id = $_POST["id"];
+        $id = $conn->real_escape_string($_POST["id"]);
         $password = $_POST["password"];
-        $name = $_POST["name"];
-        $address = $_POST["address"];
+        $password_hash = hash('sha256', $password);
+        $name = $conn->real_escape_string($_POST["name"]);
+        $address = $conn->real_escape_string($_POST["address"]);
 
-        if (!empty($password)) {
-            $password = $password;
-            $query = "update user set id='$id', password='$password', name='$name', address='$address' where id='$username'";
+        if (!empty($password_hash)) {
+            $password_hash = $password_hash;
+            $query = "update user set id='$id', password='$password_hash', name='$name', address='$address' where id='$username'";
         } else {
             $query = "update user set id='$id', name='$name', address='$address' where id='$username'";
         }

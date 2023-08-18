@@ -3,13 +3,13 @@ session_start();
 include "../common.php";
 if (!isset($_SESSION["id"])) {
     header("Location: ../index.html");
-    exit();
+    exit;
 }
 
 $loggedInUserId = $_SESSION["id"];
-$bno = $_GET['idx'];
+$bno = $conn->real_escape_string($_GET['idx']);
 $hit = mysqli_fetch_array(mq("select * from board where idx ='".$bno."'"));
-$hit = $hit['hit'] + 1;
+$hit = $conn->real_escape_string($hit['hit'] + 1);
 $fet = mq("update board set hit = '".$hit."' where idx = '".$bno."'");
 $sql = mq("select * from board where idx='".$bno."' and (lock_post = '0' or name = '$loggedInUserId')");
 $board = $sql->fetch_array();
@@ -17,7 +17,7 @@ $board = $sql->fetch_array();
 if ($board['lock_post'] == '1' && $board['name'] !== $loggedInUserId) {
     echo "<script>alert('비밀글에 접근할 수 없습니다.');</script>";
     echo "<script>history.back(-1);</script>";
-    exit();
+    exit;
 }
 ?>
 
