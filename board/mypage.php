@@ -15,11 +15,11 @@ if ($num > 0) {
     $row = mysqli_fetch_assoc($result);
 
     if (isset($_POST["action"])) {
-        $id = $conn->real_escape_string($_POST["id"]);
+        $id = xss_html_entity($conn->real_escape_string($_POST["id"]));
         $password = $_POST["password"];
         $password_hash = hash('sha256', $password);
-        $name = $conn->real_escape_string($_POST["name"]);
-        $address = $conn->real_escape_string($_POST["address"]);
+        $name = xss_html_entity($conn->real_escape_string($_POST["name"]));
+        $address = xss_html_entity($conn->real_escape_string($_POST["address"]));
 
         if (!empty($password_hash)) {
             $password_hash = $password_hash;

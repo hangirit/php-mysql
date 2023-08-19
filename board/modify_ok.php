@@ -9,9 +9,9 @@ if (!isset($_SESSION["id"])) {
 }
 
 $bno = $conn->real_escape_string($_GET['idx']);
-$username = $conn->real_escape_string($_POST['name']);
-$title = $conn->real_escape_string($_POST['title']);
-$content = $conn->real_escape_string($_POST['content']);
+$username = xss_html_entity($conn->real_escape_string($_POST['name']));
+$title = xss_html_entity($conn->real_escape_string($_POST['title']));
+$content = xss_html($conn->real_escape_string($_POST['content']));
 $sql = mq("select * from board where idx='$bno';");
 $board = $sql->fetch_array();
 $author = $board['name'];
