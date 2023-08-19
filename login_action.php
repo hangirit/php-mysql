@@ -22,6 +22,7 @@ if(!preg_match("/^[0-9a-zA-Z]*$/",($id))){
 
 if (mysqli_num_rows($result)>0){
     $_SESSION["id"] = $id;
+    $_SESSION["ip"] = $_SERVER["REMOTE_ADDR"];
     echo "<script>alert('환영 합니다.');location.href='./board/main.php';</script>";
     exit;
 }   else {

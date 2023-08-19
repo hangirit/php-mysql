@@ -2,6 +2,13 @@
 session_start();
 header("Content-Type: text/html; charset=utf-8");
 
+if(!empty($_SESSION["id"])) {
+    if($_SESSION["ip"] != $_SERVER["REMOTE_ADDR"]) {
+        echo "<script>location.href='board/logout.php'</script>";
+        exit;
+    }
+}
+
 $servername = "localhost";
 $system_user = "root";
 $system_pw = "hangirit";
