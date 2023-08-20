@@ -15,10 +15,23 @@ $content = xss_html($conn->real_escape_string($_POST['content']));
 $sql = mq("select * from board where idx='$bno';");
 $board = $sql->fetch_array();
 $author = $board['name'];
+$csrf_token_session = $_SESSION["csrf_token"];
+$csrf_token_param = $_REQUEST["csrf_token"];
+unset($_SESSION["csrf_token"]);
 
 if ($username !== $author) {
     echo "<script>alert('수정 권한이 없습니다.');history.back(-1);</script>";
     exit;
+}
+
+if(empty($csrf_token_session) && empty($csrf_token_param)) {
+        echo "<script>alert('정상적인 접근이 아닙니다.');history.back(-1);</script>";
+        exit;
+    } else {
+    if($csrf_token_param != $csrf_token_session) {
+        echo "<script>alert('정상적인 접근이 아닙니다.');history.back(-1);</script>";
+        exit;
+    }
 }
 
 $sql = mq("update board set name='".$username."',title='".$title."',content='".$content."' where idx='".$bno."'"); 

@@ -13,6 +13,7 @@ $hit = $conn->real_escape_string($hit['hit'] + 1);
 $fet = mq("update board set hit = '".$hit."' where idx = '".$bno."'");
 $sql = mq("select * from board where idx='".$bno."' and (lock_post = '0' or name = '$loggedInUserId')");
 $board = $sql->fetch_array();
+$csrf_token = csrf_token_create();
 
 if ($board['lock_post'] == '1' && $board['name'] !== $loggedInUserId) {
     echo "<script>alert('비밀글에 접근할 수 없습니다.');</script>";
@@ -43,6 +44,7 @@ if ($board['lock_post'] == '1' && $board['name'] !== $loggedInUserId) {
         <div id="bo_ser">
             <ul>
                 <li><a href="main.php">[목록으로]</a></li>
+                <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                 <li><a href="modify.php?idx=<?php echo $board['idx']; ?>">[수정]</a></li>
                 <li><a href="delete.php?idx=<?php echo $board['idx']; ?>">[삭제]</a></li>
             </ul>

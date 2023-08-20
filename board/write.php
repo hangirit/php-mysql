@@ -9,6 +9,7 @@ if (!isset($_SESSION["id"])) {
 }
 
 $username = $_SESSION["id"];
+$csrf_token = csrf_token_create();
 ?>
 
 <!doctype html>
@@ -44,6 +45,7 @@ $username = $_SESSION["id"];
                     <input type="file" value="1" name="b_file" />
                 </div>          
                 <br />
+                <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                 <button type="submit">글 작성</button>
             </form>
         </div>

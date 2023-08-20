@@ -17,12 +17,23 @@ if ($num > 0) {
     if (isset($_POST["action"])) {
         $id = xss_html_entity($conn->real_escape_string($_POST["id"]));
         $password = $_POST["password"];
-        $password_hash = hash('sha256', $password);
+        $password1 = $_POST["password1"];
+        $password2 = $_POST["password2"];
         $name = xss_html_entity($conn->real_escape_string($_POST["name"]));
         $address = xss_html_entity($conn->real_escape_string($_POST["address"]));
 
-        if (!empty($password_hash)) {
-            $password_hash = $password_hash;
+        if (hash('sha256', $password) != $row['password']) {
+            echo "<script>alert('기존 비밀번호가 일치하지 않습니다.');history.back(-1);</script>";
+            exit;
+        }
+
+        if ($password1 !== $password2) {
+            echo "<script>alert('변경할 비밀번호가 서로 일치하지 않습니다.');history.back(-1);</script>";
+            exit;
+        }
+
+        if (!empty($password1)) {
+            $password_hash = hash('sha256', $password1);
             $query = "update user set id='$id', password='$password_hash', name='$name', address='$address' where id='$username'";
         } else {
             $query = "update user set id='$id', name='$name', address='$address' where id='$username'";
@@ -55,8 +66,16 @@ if ($num > 0) {
                 <input type="text" class="form-control" name="id" placeholder="아이디 입력" value="<?php echo $row['id']; ?>" readonly>
             </div>
             <div class="form-group">
+                <label>기존 비밀번호</label>
+                <input type="password" class="form-control" name="password" placeholder="기존 비밀번호 입력">
+            </div>
+            <div class="form-group">
                 <label>변경할 비밀번호</label>
-                <input type="password" class="form-control" name="password" placeholder="변경할 패스워드 입력">
+                <input type="password" class="form-control" name="password1" placeholder="변경할 비밀번호 입력">
+            </div>
+            <div class="form-group">
+                <label>변경할 비밀번호 확인</label>
+                <input type="password" class="form-control" name="password2" placeholder="변경할 비밀번호 확인 입력">
             </div>
             <div class="form-group">
                 <label>이름</label>

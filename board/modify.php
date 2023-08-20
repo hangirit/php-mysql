@@ -13,6 +13,7 @@ $bno = $_GET['idx'];
 $sql = mq("select * from board where idx='$bno';");
 $board = $sql->fetch_array();
 $author = $board['name'];
+$csrf_token = csrf_token_create();
 
 if ($username !== $author) {
     echo "<script>alert('수정 권한이 없습니다.');history.back(-1);</script>";
@@ -44,6 +45,7 @@ if ($username !== $author) {
                 </div>
                 <br />
                 <div class="bt_se">
+                    <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                     <button type="submit">글 수정</button>
                 </div>
             </form>
