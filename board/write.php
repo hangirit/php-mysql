@@ -42,7 +42,7 @@ $csrf_token = csrf_token_create();
                 </div>  
                 <div id="in_file">
                     <br />
-                    <input type="file" value="1" name="b_file" />
+                    <input type="file" name="file" />
                 </div>          
                 <br />
                 <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">

@@ -35,7 +35,7 @@ if ($board['lock_post'] == '1' && $board['name'] !== $loggedInUserId) {
             <?php echo $board['name']; ?> <?php echo $board['date']; ?> 조회:<?php echo $board['hit']; ?>
             <div id="bo_line"></div>
             <div>
-                파일 : <a href="../upload/<?php echo $board['file']; ?>" download><?php echo $board['file']; ?></a>
+                파일 : <a href="download.php?filename=<?=$board["file"]?>"><?=$board["file"]?></a>
             </div>
         </div>
         <div id="bo_content">

@@ -35,11 +35,18 @@ if(isset($_POST['lockpost'])){
     $lo_post = '0';
 }
 
-$tmpfile = $_FILES['b_file']['tmp_name'];
-$o_name = xss_html_entity($_FILES['b_file']['name']);
-$filename = iconv("UTF-8", "EUC-KR",$_FILES['b_file']['name']);
-$folder = "../upload/".$filename;
-move_uploaded_file($tmpfile,$folder);
+if(!empty($_FILES["file"]["name"])) {
+    $o_name = $_FILES["file"]["name"];
+    $tmp_name = $_FILES["file"]["tmp_name"];
+    $file_path = "../upload/" . $o_name;
+
+    if (move_uploaded_file($tmp_name, $file_path)){
+       
+    } else {
+        echo "<script>alert('파일 업로드에 실패하였습니다.');history.back(-1);</script>";
+        exit;
+    }
+}
 
 if ($username && $password_hash && $title && $content) {
     $sql = mq("insert into board(name, pw, title, content, date, lock_post, file) values ('$username', '$password_hash', '$title', '$content', '$date', '$lo_post', '$o_name')");
