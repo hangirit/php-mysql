@@ -8,7 +8,6 @@ if (!isset($_SESSION["id"])) {
     exit();
 }
 
-
 $username = xss_html_entity($conn->real_escape_string($_POST['name']));
 $userpw = $_POST['pw'];
 $password_hash = hash('sha256', $userpw);
@@ -38,18 +37,27 @@ if(isset($_POST['lockpost'])){
 if(!empty($_FILES["file"]["name"])) {
     $o_name = $_FILES["file"]["name"];
     $tmp_name = $_FILES["file"]["tmp_name"];
-    $file_path = "../upload/" . $o_name;
+    $file_info = pathinfo($o_name);
+    $file_white_arr = array("png", "jpg", "gif");
+    $ext = strtolower($file_info["extension"]);
+    
+    if (!in_array($ext, $file_white_arr)) {
+        echo "<script>alert('png, jpg, gif만 업로드가 가능합니다.');history.back(-1);</script>";
+        exit;
+    }
+    
+    $final_filename = hash('sha256', $o_name.time());
+    $final_filename .= ".".$ext;
+    $finalpath = "../upload/" . $final_filename;
 
-    if (move_uploaded_file($tmp_name, $file_path)){
-       
-    } else {
+    if (!move_uploaded_file($tmp_name, $finalpath)){
         echo "<script>alert('파일 업로드에 실패하였습니다.');history.back(-1);</script>";
         exit;
     }
 }
 
 if ($username && $password_hash && $title && $content) {
-    $sql = mq("insert into board(name, pw, title, content, date, lock_post, file) values ('$username', '$password_hash', '$title', '$content', '$date', '$lo_post', '$o_name')");
+    $sql = mq("insert into board(name, pw, title, content, date, lock_post, file) values ('$username', '$password_hash', '$title', '$content', '$date', '$lo_post', '$final_filename')");
     if ($sql) {
         echo "<script>alert('게시글이 작성되었습니다.');location.href='main.php';</script>";
         exit;
